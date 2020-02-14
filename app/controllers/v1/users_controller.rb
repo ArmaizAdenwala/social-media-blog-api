@@ -22,7 +22,8 @@ class V1::UsersController < ApplicationController
     end
 
     return render json: user,
-      status: 200
+      meta: {access_token: '123'},
+      adapter: :json
   end
 
   private
