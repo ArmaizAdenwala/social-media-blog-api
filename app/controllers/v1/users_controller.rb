@@ -3,7 +3,6 @@ class V1::UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid? && @user.save
       render json: @user,
-        adapter: :json ,
         status: 201 and return
     end
     render json: @user.errors, status: 400
@@ -23,7 +22,7 @@ class V1::UsersController < ApplicationController
 
     return render json: user,
       meta: {access_token: '123'},
-      adapter: :json
+      status: 200
   end
 
   private
