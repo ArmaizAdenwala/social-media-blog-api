@@ -13,7 +13,11 @@ class AccessToken
     end
     
     def get_user_from_token(token)
-      response = self.decode(token)
+      begin
+        response = self.decode(token)
+      rescue JWT::VerificationError
+        return nil
+      end
       payload = response[0]
       user_id = payload['user_id']
       User.find_by(id: user_id)

@@ -1,4 +1,6 @@
 class V1::UsersController < ApplicationController
+  skip_before_action :authenticate_request, only: %i[login register]
+
   def register
     @user = User.create(user_params)
     if @user.valid? && @user.save
@@ -23,6 +25,10 @@ class V1::UsersController < ApplicationController
     return render json: user,
       meta: {access_token: '123'},
       status: 200
+  end
+
+  def test
+    render json: @current_user, status: 200
   end
 
   private
