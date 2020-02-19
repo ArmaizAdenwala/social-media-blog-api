@@ -22,8 +22,10 @@ class V1::UsersController < ApplicationController
       }, status: 400 and return
     end
 
+    payload = {user_id: user.id}
+    access_token = AccessToken.encode(payload)
     return render json: user,
-      meta: {access_token: '123'},
+      meta: {access_token: access_token},
       status: 200
   end
 
