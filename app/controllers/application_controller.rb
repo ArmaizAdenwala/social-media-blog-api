@@ -5,8 +5,10 @@ class ApplicationController < ActionController::API
   def authenticate_request
     auth_header = request.headers['Authorization']
     regex = /^Bearer /
-    auth_header = auth_header.gsub(regex, '') if auth_header
-    @current_user = AccessToken.get_user_from_token(auth_header)
+    if auth_header
+      auth_header = auth_header.gsub(regex, '')
+      @current_user = AccessToken.get_user_from_token(auth_header)
+    end
     render json: { error: 'Not Authorized' }, status: 401 unless @current_user
   end
 end

@@ -15,6 +15,6 @@ class UserTest < ActiveSupport::TestCase
     user1 = User.new(email: 'john@doe.com', password: 'password', password_confirmation: 'password')
     user2 = User.new(email: 'john@doe.com', password: 'password', password_confirmation: 'password')
     assert user1.save
-    assert user2.save
+    assert_not user2.save
   end
 end
